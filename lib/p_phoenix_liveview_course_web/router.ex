@@ -18,6 +18,7 @@ defmodule PPhoenixLiveviewCourseWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/start", StartLive, :index
   end
 
   # Other scopes may use custom stacks.
