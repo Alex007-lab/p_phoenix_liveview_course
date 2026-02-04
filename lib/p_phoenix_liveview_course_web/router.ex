@@ -19,6 +19,7 @@ defmodule PPhoenixLiveviewCourseWeb.Router do
 
     get "/", PageController, :home
     live "/start", StartLive, :index
+    live "/blackjack", BlackjackLive, :index
   end
 
   # Other scopes may use custom stacks.
