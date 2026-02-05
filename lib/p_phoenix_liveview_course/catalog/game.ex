@@ -17,5 +17,6 @@ defmodule PPhoenixLiveviewCourse.Catalog.Game do
     |> cast(attrs, [:name, :description, :unit_price, :sku])
     |> validate_required([:name, :description, :unit_price, :sku])
     |> unique_constraint(:sku)
+    |> validate_length(:name, min: 5, max: 100)
   end
 end
