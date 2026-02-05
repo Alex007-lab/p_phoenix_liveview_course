@@ -11,7 +11,16 @@ defmodule PPhoenixLiveviewCourseWeb.BlackjackLive do
 
   @impl true
   def handle_event("draw", %{"count" => count}, socket) do
-    {:noreply, socket |> draw_card(count) |> cpu_draw_card(count) |> handle_winner_on_draw()}
+    {:noreply,
+     socket
+     |> draw_card(String.to_integer(count))
+     |> cpu_draw_card(String.to_integer(count))
+     |> handle_winner_on_draw()}
+  end
+
+  @impl true
+  def handle_event("stand", _params, socket) do
+    {:noreply, socket |> cpu_draw_card(1) |> handle_winner_on_stand()}
   end
 
   # Privates
@@ -59,6 +68,22 @@ defmodule PPhoenixLiveviewCourseWeb.BlackjackLive do
         player_points > 21 -> :cpu
         cpu_points > 21 -> :player
         true -> nil
+      end
+
+    socket |> assign(winner: winner)
+  end
+
+  defp handle_winner_on_stand(socket) do
+    player_points = points(socket.assigns.player)
+    cpu_points = points(socket.assigns.cpu)
+
+    winner =
+      cond do
+        player_points > 21 -> :cpu
+        cpu_points > 21 -> :player
+        player_points > cpu_points -> :player
+        player_points < cpu_points -> :cpu
+        true -> :tie
       end
 
     socket |> assign(winner: winner)
