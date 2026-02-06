@@ -41,6 +41,10 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.FormComponent do
           <div class="mt-4">
             <.live_img_preview entry={image} width="250" />
           </div>
+
+          <%= for err <- upload_errors(@uploads.image, image) do %>
+            <.error>{err}</.error>
+          <% end %>
         <% end %>
 
         <:actions>
