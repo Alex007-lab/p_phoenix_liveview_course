@@ -7,6 +7,7 @@ defmodule PPhoenixLiveviewCourse.Catalog.Game do
     field :description, :string
     field :unit_price, :float
     field :sku, :integer
+    field(:image_upload, :string)
 
     timestamps(type: :utc_datetime)
   end
@@ -14,7 +15,7 @@ defmodule PPhoenixLiveviewCourse.Catalog.Game do
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:name, :description, :unit_price, :sku])
+    |> cast(attrs, [:name, :description, :unit_price, :sku, :image_upload])
     |> validate_required([:name, :description, :unit_price, :sku])
     |> unique_constraint(:sku)
     |> validate_length(:name, min: 5, max: 100)
