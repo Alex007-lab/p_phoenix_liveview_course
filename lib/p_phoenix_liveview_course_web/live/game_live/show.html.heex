@@ -14,7 +14,10 @@
   <:item title="Unit price">{@game.unit_price}</:item>
   <:item title="Sku">{@game.sku}</:item>
   <:item title="Image">
-    <img src={@game.image_upload} alt="Game Image" />
+    <img src={@game.image_upload} alt="Game Image" width="300" />
+  </:item>
+  <:item title="Tomatoes Rating">
+    good: {@tomatoes.good} / bad: {@tomatoes.bad}
   </:item>
 </.list>
 

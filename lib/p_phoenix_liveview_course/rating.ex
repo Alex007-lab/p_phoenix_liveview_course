@@ -101,4 +101,8 @@ defmodule PPhoenixLiveviewCourse.Rating do
   def change_tomatoes(%Tomatoes{} = tomatoes, attrs \\ %{}) do
     Tomatoes.changeset(tomatoes, attrs)
   end
+
+  def get_tomatoes_by_game(game_id) do
+    Repo.get_by(Tomatoes, game_id: game_id)
+  end
 end
