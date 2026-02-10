@@ -16,8 +16,7 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:game, Catalog.get_game!(id))
-     |> assign_tomatoes_rating(id)}
+     |> assign(:game, Catalog.get_game!(id))}
   end
 
   @impl true
@@ -33,16 +32,6 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Show do
       error ->
         IO.inspect(error)
         {:noreply, socket |> put_flash(:error, "Cannot update tomatoes info")}
-    end
-  end
-
-  defp assign_tomatoes_rating(socket, game_id) do
-    case Rating.get_tomatoes_by_game(game_id) do
-      %Tomatoes{} = tomatoes ->
-        socket |> assign(:tomatoes, tomatoes)
-
-      _ ->
-        socket |> put_flash(:error, "Cannot get tomatoes info")
     end
   end
 
